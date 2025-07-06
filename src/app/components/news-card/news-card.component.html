@@ -1,0 +1,56 @@
+<div class="news_card">
+  <img 
+    [src]="news.image_preview || ''" 
+    class="cover"
+    [alt]="news.content_name">
+  
+  <div class="content">
+    <div class="news-header">
+      <div class="info">
+        {{ getDateInfo() }}
+      </div>
+      
+      <!-- Action Dropdown -->
+      <div class="relative">
+        <img 
+          src="icons/dropdown.svg"
+          alt="action" 
+          class="action-button"
+          (click)="toggleDropdown()">
+        
+        <!-- Dropdown Menu -->
+        <div 
+          *ngIf="showDropdown" 
+          class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 border border-gray-200"
+          (click)="closeDropdown()">
+          <div class="py-1">
+            <div class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" (click)="viewNews()">
+              <img src="icons/view.svg" alt="view" class="w-4 h-4 mr-2">
+              <span>View news post</span>
+            </div>
+            <div class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" (click)="editNews()">
+              <img src="icons/edit.svg" alt="consultation" class="w-4 h-4 mr-2">
+              <span>Edit news post</span>
+            </div>
+            <div class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" (click)="archiveNews()">
+              <img src="icons/archive.svg" alt="archive" class="w-4 h-4 mr-2">
+              <span>Archive news post</span>
+            </div>
+            <div class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 cursor-pointer" (click)="confirmDelete()">
+              <img src="icons/delete.svg" alt="delete" class="w-4 h-4 mr-2">
+              <span>Delete news post</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="title">
+      <span>{{ news.content_name }}</span>
+    </div>
+    
+    <div class="description" [innerHTML]="getPreviewText()">
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,223 @@
+.all_blogs_container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    .sub_title {
+        font-weight: 600;
+        font-size: 21px;
+        line-height: 28px;
+        color: var(--text-primary);
+    }
+
+    .blogs {
+        display: flex;
+        gap: 28px;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+
+// Additional styles for the news list container
+.news-list-container {
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+// Custom styles for Tailwind classes that need dark mode support
+.news-title {
+    color: var(--text-primary) !important;
+}
+
+// View Switcher Styles
+.view-switcher-btn {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    
+    &.active {
+        background-color: var(--bg-primary);
+        color: var(--primary-color);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    &:hover:not(.active) {
+        color: var(--text-primary);
+    }
+}
+
+// Filter Button Styles
+.filter-btn {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    
+    &.active {
+        background-color: var(--bg-primary);
+        color: var(--primary-color);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    &:hover:not(.active) {
+        color: var(--text-primary);
+    }
+}
+
+// Search Input Styles
+.search-input {
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(22, 175, 183, 0.1);
+    }
+    
+    &::placeholder {
+        color: var(--text-tertiary);
+    }
+}
+
+// Status Badge Styles
+.status-active {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-archived {
+    background-color: rgba(107, 114, 128, 0.1);
+    color: var(--text-secondary);
+    border: 1px solid rgba(107, 114, 128, 0.2);
+}
+
+// Dark mode adjustments for status badges
+[data-theme="dark"] {
+    .status-active {
+        background-color: rgba(16, 185, 129, 0.2);
+        border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .status-archived {
+        background-color: rgba(107, 114, 128, 0.2);
+        border-color: rgba(107, 114, 128, 0.3);
+    }
+}
+
+// Table Styles
+.news-table {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    
+    .table-header {
+        background-color: var(--bg-secondary);
+        
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+    }
+    
+    .table-body {
+        .table-row {
+            border-bottom-color: var(--border-primary);
+            
+            &:hover {
+                background-color: var(--bg-secondary);
+            }
+            
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+    
+    .table-text-primary {
+        color: var(--text-primary);
+    }
+    
+    .table-text-secondary {
+        color: var(--text-secondary);
+    }
+    
+    .table-action-btn {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+            background-color: var(--bg-tertiary);
+        }
+        
+        // Style for action icons
+        img {
+            filter: none;
+            transition: filter 0.2s ease;
+        }
+        
+        // Special styling for delete button
+        &[title="Delete"] {
+            &:hover {
+                background-color: var(--error-color);
+                border-color: var(--error-color);
+                
+                img {
+                    filter: brightness(0) invert(1); // Makes the icon white on hover
+                }
+            }
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .news-table {
+        .table-header th,
+        .table-body td {
+            padding: 12px 16px;
+        }
+        
+        .table-action-btn {
+            padding: 6px;
+            
+            img {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+    
+    // Stack search and filter on mobile
+    .search-filter-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+}
+
+.news-pagination {
+    .pagination-button {
+        background-color: var(--bg-primary);
+        color: var(--text-secondary);
+        border-color: var(--border-secondary);
+        
+        &:hover {
+            background-color: var(--bg-secondary);
+        }
+        
+        &.active {
+            background-color: var(--primary-color);
+            color: var(--text-inverse);
+            border-color: var(--primary-color);
+        }
+    }
+}

@@ -1,0 +1,179 @@
+// Modal Styles
+.modal-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-primary);
+}
+
+// Status Badge Styles
+.status-active {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: rgb(34, 197, 94);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-archived {
+  background-color: rgba(156, 163, 175, 0.1);
+  color: rgb(156, 163, 175);
+  border: 1px solid rgba(156, 163, 175, 0.2);
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .modal-content {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+  }
+  
+  // Stack layout on mobile/tablet
+  :global(.flex.flex-col.lg\:flex-row) {
+    flex-direction: column;
+  }
+  
+  :global(.lg\:w-1\/2) {
+    width: 100%;
+  }
+  
+  :global(.lg\:border-l) {
+    border-left: none !important;
+    border-top: 1px solid var(--border-primary);
+  }
+  
+  :global(.lg\:min-h-\[400px\]) {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 8px;
+    max-height: calc(100vh - 16px);
+  }
+  
+  .p-6 {
+    padding: 1rem;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  :global(.max-h-\[400px\]) {
+    max-height: 300px;
+  }
+  
+  :global(.h-64) {
+    height: 200px;
+  }
+  
+  :global(.w-16.h-16) {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// Dark Mode Specific Adjustments
+[data-theme="dark"] {
+  .status-active {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: rgb(74, 222, 128);
+  }
+  
+  .status-archived {
+    background-color: rgba(156, 163, 175, 0.15);
+    color: rgb(209, 213, 219);
+  }
+}
+
+// Loading Animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content {
+  animation: fadeIn 0.2s ease-out;
+}
+
+// Utility Classes
+.transition-all {
+  transition: all 0.2s ease;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease;
+}
+
+// Prose styles for content
+.prose {
+  line-height: 1.7;
+  
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  strong {
+    font-weight: 600;
+  }
+  
+  em {
+    font-style: italic;
+  }
+  
+  ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.25rem;
+  }
+  
+  blockquote {
+    border-left: 4px solid var(--border-secondary);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  
+  code {
+    background-color: var(--bg-secondary);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    color: var(--text-primary);
+  }
+  
+  pre {
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+} 

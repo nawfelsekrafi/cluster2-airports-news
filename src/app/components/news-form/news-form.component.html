@@ -1,0 +1,178 @@
+<!-- Full screen modal overlay -->
+<div 
+  *ngIf="isOpen" 
+  class="fixed inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center p-4"
+  style="z-index: 1050;"
+  (click)="close()">
+  
+  <!-- Modal content -->
+  <div 
+    class="rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl transform transition-all"
+    [ngStyle]="{ 'background-color': 'var(--bg-primary)' }"
+    (click)="$event.stopPropagation()">
+    
+    <!-- Modal header -->
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-2xl font-bold" [ngStyle]="{ 'color': 'var(--text-primary)' }">
+        {{ isEditMode ? 'Edit News Post' : 'Create New News Post' }}
+      </h2>
+      <button 
+        (click)="close()"
+        class="hover:opacity-70 transition-opacity"
+        [ngStyle]="{ 'color': 'var(--text-tertiary)' }">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Form -->
+    <form [formGroup]="newsForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      
+      <!-- Image Upload Section -->
+      <div class="form-group">
+        <label class="form-label">Featured Image</label>
+        
+        <!-- Image Preview -->
+        <div *ngIf="imagePreviewUrl" class="mb-4">
+          <div class="relative inline-block">
+            <img 
+              [src]="imagePreviewUrl" 
+              alt="Preview" 
+              class="w-32 h-32 object-cover rounded-lg border-2"
+              [ngStyle]="{ 'border-color': 'var(--border-secondary)' }">
+            <button 
+              type="button"
+              (click)="removeImage()"
+              class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- File Input -->
+        <div class="flex items-center justify-center w-full">
+          <label 
+            for="image-upload" 
+            class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+            [ngStyle]="{ 
+              'border-color': 'var(--border-secondary)',
+              'background-color': 'var(--bg-secondary)'
+            }">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg class="w-8 h-8 mb-4" [ngStyle]="{ 'color': 'var(--text-tertiary)' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+              </svg>
+              <p class="mb-2 text-sm" [ngStyle]="{ 'color': 'var(--text-secondary)' }">
+                <span class="font-semibold">Click to upload</span> or drag and drop
+              </p>
+              <p class="text-xs" [ngStyle]="{ 'color': 'var(--text-tertiary)' }">PNG, JPG, GIF up to 5MB</p>
+            </div>
+            <input 
+              id="image-upload" 
+              type="file" 
+              class="hidden" 
+              accept="image/*"
+              (change)="onImageSelected($event)">
+          </label>
+        </div>
+      </div>
+      
+      <!-- News Title -->
+      <div class="form-group">
+        <label for="content_name" class="form-label">News Title *</label>
+        <input 
+          type="text" 
+          id="content_name"
+          formControlName="content_name"
+          placeholder="Enter the news title"
+          class="form-input"
+          [class.error]="isFieldInvalid('content_name')"
+          [ngStyle]="{ 
+            'background-color': 'var(--bg-primary)',
+            'border-color': isFieldInvalid('content_name') ? 'var(--error-color)' : 'var(--border-secondary)',
+            'color': 'var(--text-primary)'
+          }">
+        <div *ngIf="isFieldInvalid('content_name')" class="form-error">
+          {{ getFieldError('content_name') }}
+        </div>
+      </div>
+      
+      <!-- News Text -->
+      <div class="form-group">
+        <label for="news_text" class="form-label">Full News Content *</label>
+        <textarea 
+          id="news_text"
+          formControlName="news_text"
+          rows="8"
+          placeholder="Enter the full news content (supports HTML)"
+          class="form-input resize-none"
+          [class.error]="isFieldInvalid('news_text')"
+          [ngStyle]="{ 
+            'background-color': 'var(--bg-primary)',
+            'border-color': isFieldInvalid('news_text') ? 'var(--error-color)' : 'var(--border-secondary)',
+            'color': 'var(--text-primary)'
+          }"></textarea>
+        <div *ngIf="isFieldInvalid('news_text')" class="form-error">
+          {{ getFieldError('news_text') }}
+        </div>
+        <p class="text-xs mt-1" [ngStyle]="{ 'color': 'var(--text-tertiary)' }">
+          You can use HTML tags for formatting (e.g., &lt;strong&gt;, &lt;em&gt;, &lt;p&gt;)
+        </p>
+      </div>
+      
+      <!-- Archive Status -->
+      <div class="form-group">
+        <label class="flex items-center space-x-3 cursor-pointer">
+          <input 
+            type="checkbox" 
+            formControlName="is_archived"
+            class="form-checkbox w-4 h-4 rounded focus:ring-2 transition-colors"
+            [ngStyle]="{ 
+              'color': 'var(--primary-color)',
+              'background-color': 'var(--bg-primary)',
+              'border-color': 'var(--border-secondary)'
+            }">
+          <span class="text-sm font-medium" [ngStyle]="{ 'color': 'var(--text-primary)' }">
+            Archive this news post
+          </span>
+        </label>
+        <p class="text-xs mt-1 ml-7" [ngStyle]="{ 'color': 'var(--text-tertiary)' }">
+          Archived posts won't be visible to users by default
+        </p>
+      </div>
+      
+      <!-- Form Actions -->
+      <div class="flex justify-end space-x-4 pt-6 border-t" [ngStyle]="{ 'border-color': 'var(--border-primary)' }">
+        <button 
+          type="button"
+          (click)="close()"
+          class="px-6 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+          [ngStyle]="{ 
+            'color': 'var(--text-primary)', 
+            'background-color': 'var(--bg-secondary)' 
+          }">
+          Cancel
+        </button>
+        
+        <button 
+          type="submit"
+          [disabled]="newsForm.invalid || isSubmitting"
+          class="px-6 py-2 text-sm font-medium text-white rounded-md hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+          [ngStyle]="{ 'background-color': 'var(--primary-color)' }">
+          <span *ngIf="!isSubmitting">{{ isEditMode ? 'Update' : 'Create' }} News Post</span>
+          <span *ngIf="isSubmitting" class="flex items-center">
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            {{ isEditMode ? 'Updating...' : 'Creating...' }}
+          </span>
+        </button>
+      </div>
+      
+    </form>
+  </div>
+</div>

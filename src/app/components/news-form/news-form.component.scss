@@ -1,0 +1,146 @@
+// Form Styles
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(22, 175, 183, 0.1);
+  }
+  
+  &::placeholder {
+    color: var(--text-tertiary);
+  }
+  
+  &.error {
+    border-color: var(--error-color);
+    
+    &:focus {
+      border-color: var(--error-color);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+  }
+}
+
+.form-error {
+  color: var(--error-color);
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.form-checkbox {
+  accent-color: var(--primary-color);
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(22, 175, 183, 0.1);
+  }
+}
+
+// Image Upload Styles
+.image-upload-area {
+  border: 2px dashed var(--border-secondary);
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: var(--primary-color);
+    background-color: var(--bg-tertiary);
+  }
+}
+
+// Modal Styles
+.modal-overlay {
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-primary);
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+  }
+  
+  .form-input {
+    padding: 10px 12px;
+    font-size: 16px; // Prevents zoom on iOS
+  }
+  
+  .grid-cols-1.md\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Loading Animation
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+// Dark Mode Specific Adjustments
+[data-theme="dark"] {
+  .form-input {
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(22, 175, 183, 0.2);
+    }
+    
+    &.error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    }
+  }
+  
+  .form-checkbox:focus {
+    box-shadow: 0 0 0 3px rgba(22, 175, 183, 0.2);
+  }
+  
+  .image-upload-area:hover {
+    background-color: var(--bg-tertiary);
+  }
+}
+
+// Utility Classes
+.transition-all {
+  transition: all 0.2s ease;
+}
+
+.transition-colors {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.transition-opacity {
+  transition: opacity 0.2s ease;
+}

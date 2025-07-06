@@ -1,0 +1,50 @@
+<!-- Full screen modal overlay -->
+<div 
+  *ngIf="open" 
+  class="fixed inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50"
+  (click)="cancel()">
+  
+  <!-- Modal content -->
+  <div 
+    class="rounded-lg p-6 max-w-md w-full mx-4 shadow-xl transform transition-all"
+    [ngStyle]="{ 'background-color': 'var(--bg-primary)' }"
+    (click)="$event.stopPropagation()">
+    
+    <!-- Modal header -->
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-semibold" [ngStyle]="{ 'color': 'var(--text-primary)' }">{{ data.title }}</h3>
+      <button 
+        (click)="cancel()"
+        class="hover:opacity-70 transition-opacity"
+        [ngStyle]="{ 'color': 'var(--text-tertiary)' }">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Modal body -->
+    <div class="mb-6">
+      <p [ngStyle]="{ 'color': 'var(--text-secondary)' }">{{ data.description }}</p>
+    </div>
+    
+    <!-- Modal footer -->
+    <div class="flex justify-end space-x-3">
+      <button 
+        (click)="cancel()"
+        class="px-4 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+        [ngStyle]="{ 
+          'color': 'var(--text-primary)', 
+          'background-color': 'var(--bg-secondary)' 
+        }">
+        Cancel
+      </button>
+      <button 
+        (click)="delete()"
+        class="px-4 py-2 text-sm font-medium text-white rounded-md hover:opacity-90 transition-opacity"
+        [ngStyle]="{ 'background-color': 'var(--error-color)' }">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

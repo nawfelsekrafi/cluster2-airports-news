@@ -1,0 +1,128 @@
+<!-- Full screen modal overlay -->
+<div 
+  *ngIf="isOpen" 
+  class="fixed inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center p-4"
+  style="z-index: 1050;"
+  (click)="close()">
+  
+  <!-- Modal content -->
+  <div 
+    class="rounded-lg p-0 max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-xl transform transition-all"
+    [ngStyle]="{ 'background-color': 'var(--bg-primary)' }"
+    (click)="$event.stopPropagation()">
+    
+    <!-- Modal header -->
+    <div class="flex items-center justify-between p-6 border-b" [ngStyle]="{ 'border-color': 'var(--border-primary)' }">
+      <h2 class="text-2xl font-bold" [ngStyle]="{ 'color': 'var(--text-primary)' }">
+        {{ news?.content_name || news?.title || 'News Post' }}
+      </h2>
+      <button 
+        (click)="close()"
+        class="hover:opacity-70 transition-opacity"
+        [ngStyle]="{ 'color': 'var(--text-tertiary)' }">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Modal body -->
+    <div class="overflow-y-auto max-h-[calc(90vh-120px)]">
+      <!-- Desktop Layout: Image left, content right -->
+      <div class="flex flex-col lg:flex-row">
+        <!-- Image Section -->
+        <div class="lg:w-1/2 lg:min-h-[400px] flex items-center justify-center p-6">
+          <div class="w-full max-w-md lg:max-w-none">
+            <img 
+              *ngIf="news?.image_preview; else noImageTemplate"
+              [src]="news?.image_preview" 
+              [alt]="news?.content_name || news?.title"
+              class="w-full h-auto rounded-lg shadow-md object-cover max-h-[400px] lg:max-h-[500px]">
+            
+            <ng-template #noImageTemplate>
+              <div 
+                class="w-full h-64 lg:h-80 rounded-lg flex items-center justify-center border-2 border-dashed"
+                [ngStyle]="{ 
+                  'border-color': 'var(--border-secondary)',
+                  'background-color': 'var(--bg-secondary)'
+                }">
+                <div class="text-center">
+                  <svg class="w-16 h-16 mx-auto mb-4" [ngStyle]="{ 'color': 'var(--text-tertiary)' }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <p class="text-sm" [ngStyle]="{ 'color': 'var(--text-tertiary)' }">No image available</p>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        
+        <!-- Content Section -->
+        <div class="lg:w-1/2 p-6 lg:border-l" [ngStyle]="{ 'border-color': 'var(--border-primary)' }">
+          <!-- Meta Information -->
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm" [ngStyle]="{ 'color': 'var(--text-secondary)' }">
+                {{ formatDate(news?.created_at || '') }}
+              </span>
+              <span 
+                class="px-3 py-1 text-xs font-medium rounded-full"
+                [ngClass]="news?.is_archived ? 'status-archived' : 'status-active'">
+                {{ news?.is_archived ? 'Archived' : 'Active' }}
+              </span>
+            </div>
+            
+            <!-- Alternative Title (if different from main title) -->
+            <div *ngIf="news?.title && news?.title !== news?.content_name" class="mb-4">
+              <h3 class="text-lg font-semibold" [ngStyle]="{ 'color': 'var(--text-secondary)' }">
+                {{ news?.title || 'No title available' }}
+              </h3>
+            </div>
+            
+            <!-- Short Description (if available) -->
+            <div *ngIf="news?.content && news?.content !== news?.content_name" class="mb-4">
+              <p class="text-sm leading-relaxed" [ngStyle]="{ 'color': 'var(--text-secondary)' }">
+                {{ news?.content || 'No content available' }}
+              </p>
+            </div>
+          </div>
+          
+          <!-- Main Content -->
+          <div class="prose prose-sm max-w-none">
+            <div 
+              class="text-base leading-relaxed"
+              [ngStyle]="{ 'color': 'var(--text-primary)' }"
+              [innerHTML]="news?.news_text || 'No content available'">
+            </div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="flex justify-end space-x-3 mt-8 pt-6 border-t" [ngStyle]="{ 'border-color': 'var(--border-primary)' }">
+            <button 
+              (click)="editNews()"
+              class="px-4 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity flex items-center"
+              [ngStyle]="{ 
+                'color': 'white', 
+                'background-color': 'var(--primary-color)' 
+              }">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+              Edit
+            </button>
+            
+            <button 
+              (click)="close()"
+              class="px-4 py-2 text-sm font-medium rounded-md hover:opacity-90 transition-opacity"
+              [ngStyle]="{ 
+                'color': 'var(--text-primary)', 
+                'background-color': 'var(--bg-secondary)' 
+              }">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
