@@ -2,40 +2,6 @@
 
 A comprehensive news management system built with Angular 18 and Tailwind CSS, featuring a modern UI with dark mode support and responsive design.
 
-## 📸 Screenshots
-
-### Dashboard - Cards View
-![News Dashboard Cards View](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.42.00%20PM.png)
-*Modern card-based layout with search, filter options, and responsive design*
-
-### Dashboard - Table View
-![News Dashboard Table View](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.41.52%20PM.png)
-*Comprehensive table view with sorting, pagination, and action buttons*
-
-### Create/Edit News Form
-![Create News Form](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.42.14%20PM.png)
-*Full-featured news creation form with image upload and validation*
-
-### News View Modal
-![News View Modal](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.42.31%20PM.png)
-*Responsive modal for viewing complete news articles with image and content*
-
-### Dark Mode Support
-![Dark Mode Interface](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.42.48%20PM.png)
-*Elegant dark theme with consistent styling across all components*
-
-### Search & Filter Features
-![Search and Filter](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.42.56%20PM.png)
-*Real-time search functionality with advanced filtering options*
-
-### Mobile Responsive Design
-![Mobile View](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.43.03%20PM.png)
-*Optimized mobile interface with touch-friendly interactions*
-
-### Archive Management
-![Archive Management](https://raw.githubusercontent.com/nawfelsekrafi/cluster2-airports-news/main/public/demos/Screenshot%202025-07-06%20at%207.41.29%20PM.png)
-*Comprehensive archive system for managing post visibility*
-
 ## 🚀 Technologies Used
 
 ### Frontend Framework
@@ -105,11 +71,28 @@ A comprehensive news management system built with Angular 18 and Tailwind CSS, f
 - **Touch-Friendly** - Mobile interaction support
 - **Cross-Browser** - Compatible across modern browsers
 
-### Performance
-- **Lazy Loading** - Efficient resource loading
-- **Change Detection** - Optimized Angular performance
-- **Memory Management** - Proper cleanup and disposal
-- **Minimal Bundle Size** - Optimized build output
+## 📸 Screenshots
+
+### Dashboard - Cards View
+![News Dashboard Cards View](https://github.com/nawfelsekrafi/cluster2-airports-news/blob/main/public/demos/Screenshot%202025-07-06%20at%207.42.14%E2%80%AFPM.png?raw=true)
+*Modern card-based layout with search, filter options, and responsive design*
+
+### Dashboard - Table View
+![News Dashboard Table View](https://github.com/nawfelsekrafi/cluster2-airports-news/blob/main/public/demos/Screenshot%202025-07-06%20at%207.41.52%E2%80%AFPM.png?raw=true)
+*Comprehensive table view with sorting, pagination, and action buttons*
+
+### Create/Edit News Form
+![Create News Form](https://github.com/nawfelsekrafi/cluster2-airports-news/blob/main/public/demos/Screenshot%202025-07-06%20at%207.42.48%E2%80%AFPM.png?raw=true)
+*Full-featured news creation form with image upload and validation*
+
+### News View Modal
+![News View Modal](https://github.com/nawfelsekrafi/cluster2-airports-news/blob/main/public/demos/Screenshot%202025-07-06%20at%207.42.00%E2%80%AFPM.png?raw=true )
+*Responsive modal for viewing complete news articles with image and content*
+
+### Dark Mode Support
+![Dark Mode Interface](https://github.com/nawfelsekrafi/cluster2-airports-news/blob/main/public/demos/Screenshot%202025-07-06%20at%207.42.56%E2%80%AFPM.png?raw=true)
+*Elegant dark theme with consistent styling across all components*
+
 
 ## 🚀 Getting Started
 
